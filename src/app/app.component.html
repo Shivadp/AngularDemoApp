@@ -1,0 +1,129 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="container">
+<section class="todoapp">
+	<header class="header">
+		<h1>todos</h1>
+   
+    <!-- ADD TASK FIELD START-->
+    <div class="createTask">
+      <form (submit)="addTodo()" class="form-inline createForm">
+          <!-- ADD SUMMARY START-->
+          <div class="col">
+            <div class="form-group">
+                <input type="text" class="form-control" name="todoTask" [(ngModel)]="todoTask" size="30" placeholder="New task" required>
+                          
+            </div>
+          </div>
+          <!-- ADD SUMMARY END-->
+          <!-- ADD PRIORITY START-->
+          <div class="col">
+            <div class="form-group">
+                <select class="form-control priority" name="todoPriority" [(ngModel)]="todoPriority">
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
+                </select>
+            </div>
+          </div>
+          <!-- ADD PRIORITY END-->
+          <!-- ADD DUE DATE START-->
+          <div class="col">
+            <div class="form-group">
+                <input class="form-control datepicker" type="date" name="todoDueDate" [(ngModel)]="todoDueDate" placeholder="yyyy-MM-dd" min="Date.now()" required/>
+            </div>
+          </div>
+          <!-- ADD DUE DATE END-->
+          <!-- SUBMIT BTN -->
+          <div class="col">
+             <button class="btn btn-default btn-success tbtn" type="submit">Add New Task</button>
+          </div>
+          <!-- SUBMIT BTN -->
+      </form>
+    
+  </div>
+  <!-- ADD TASK FIELD END-->
+	</header>
+	<section class="main" *ngIf="todoStore.todos.length > 0">
+
+   
+		<ul class="todo-list">
+      <li>
+          <div class="selectall">
+              <input id="toggle-all" class="toggle" type="checkbox" *ngIf="todoStore.todos.length" #toggleall [checked]="todoStore.allCompleted()"
+              (click)="todoStore.setAllTo(toggleall.checked)"> 
+              <label>Select All  </label>
+             
+              <span class="tasksLeft">Todo <span> {{todoStore.getRemaining().length }} </span> / {{todoStore.todos.length}} [<a  href="javascript: void(0)" (click)="removeCompleted()">clear done tasks</a>]</span>
+            </div> 
+        </li>
+      <li class="headerRow ">
+         <div class="row">
+          
+          <div class="col col-sm-3 text-center tsection">
+              <a href="javascript: void(0)" (click)="order('title')">Task Title</a>
+              <span class="sortorder" ng-show="predicate === 'title'" ng-class="{reverse:reverse}"></span>
+          </div>
+          <div class="col col-sm-4 text-center tsection">
+            <a href="javascript: void(0)" (click)="order('priority')">Priority</a>
+            <span class="sortorder" ng-show="predicate === 'priority'" ng-class="{reverse:reverse}"></span>
+          </div>
+          <div class="col col-sm-4 text-center tsection">
+            <a href="javascript: void(0)" (click)="order('dueDate')">Due Date</a>
+            <span class="sortorder" ng-show="predicate === 'dueDate'" ng-class="{reverse:reverse}"></span>
+          </div>
+        
+        </div>
+      </li>
+			<li *ngFor="let todo of todoStore.todos" [class.completed]="todo.completed" [class.editing]="todo.editing">
+				<div class="row view">
+          <div class="col-sm-3">
+          <input class="toggle" type="checkbox" (click)="toggleCompletion(todo)" [checked]="todo.completed">
+          <label class="fcol" (dblclick)="editTodo(todo)">{{todo.title}}</label>
+        </div>
+        <div class="col-sm-4  text-center">
+            <label class="fcol">{{todo.priority}}</label>
+        </div>
+        <div class="col-sm-4  text-center">
+            <label  class="fcol">{{todo.dueDate}}</label>   
+        </div>                                     
+          <button class="editicon" style="right: 40px" (click)="editTodo(todo)"> </button>
+					<button class="destroy" (click)="remove(todo)"> </button>
+        </div>
+        <div class="row editrow" *ngIf="todo.editing">  
+          
+            <div class="col-sm-3">    
+              <input class="form-control" [value]="todo.title" #editedtodoTitle                
+                  (keyup.enter)="updateEditingTodo(todo, editedtodoTitle.value, editedtodoPriority.value, editedtodoDueDate.value)" 
+                  (keyup.escape)="cancelEditingTodo(todo)">
+            </div>
+            <div class="col-sm-3">
+                <select class="form-control" name="priority" [value]="todo.priority" #editedtodoPriority
+                (keyup.change)="updateEditingTodo(todo, editedtodoTitle.value, editedtodoPriority.value, editedtodoDueDate.value)" 
+                (keyup.escape)="cancelEditingTodo(todo)">
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
+                </select>
+            </div>
+            <div class="col-sm-3">        
+              <input class="form-control datepicker" type="date" name="dueDate" [value]="todo.dueDate" 
+                placeholder="yyyy-MM-dd" min="2015-01-01" max="2016-12-31" #editedtodoDueDate
+                (keyup.enter)="updateEditingTodo(todo, editedtodoTitle.value, editedtodoPriority.value, editedtodoDueDate.value)" 
+                (keyup.escape)="cancelEditingTodo(todo)"
+              />
+            </div>
+            <div class="col-sm-1">
+              <button type="button" class="btn btn-default tbtn" (click)="stopEditing(todo, editedtodoTitle.value, editedtodoPriority.value, editedtodoDueDate.value)" >Done</button>
+            </div>
+          
+        </div>  
+			</li>
+		</ul>
+	</section>
+	<footer class="footer" *ngIf="todoStore.todos.length > 0">
+		<span class="todo-count"><strong>{{todoStore.getRemaining().length}}</strong> {{todoStore.getRemaining().length == 1 ? 'item' : 'items'}} left</span>
+		<button class="clear-completed" *ngIf="todoStore.getCompleted().length > 0" (click)="removeCompleted()">Clear completed</button>
+	</footer>
+</section>
+
+  </div>

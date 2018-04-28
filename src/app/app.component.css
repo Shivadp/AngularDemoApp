@@ -1,0 +1,171 @@
+.editItem .removeBtn {
+    display: none;
+}
+
+.editItem .todoSummary {
+    display: none;
+}
+
+.editForm {
+    display: none;
+}
+
+.editItem .editForm {
+    display: inline-block;
+}
+
+.createTask {
+    background-color: rgba(128, 128, 128, 0.66);
+    padding: 10px;
+}
+
+.sortorder:after {
+    content: '\25b2';
+}
+
+.sortorder.reverse:after {
+    content: '\25bc';
+}
+
+.Bg3 {
+    background-color: #f2dede;
+}
+
+
+.tasksLeft {
+    float:right;
+    display: inline-block;
+}
+.toDoContainer{
+    max-width: 1024px;
+    margin: 0 auto;
+}
+.todo-list li label{
+    display: inline;
+    width: 33%;
+}
+.todo-list li .editicon {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 30px;
+    bottom: 0;
+    width: 40px;
+    height: 40px;
+    margin: auto 0;
+    font-size: 30px;
+    color: #cc9a9a;
+    margin-bottom: 11px;
+    -webkit-transition: color 0.2s ease-out;
+    transition: color 0.2s ease-out;
+
+   
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+
+}
+.todo-list li:hover .editicon {
+    display: block;
+}
+.todo-list li .editicon:after{
+    content: '\e065';
+}
+
+.fcol{
+    width: 20%;
+}
+.selectall{padding: 10px 0px}
+.headerRow{padding:20px 0px; font-size: 24px; background: #E20074; color: #fff;}
+.headerRow a, .headerRow a:link, .headerRow a:visited{
+    color: #fff
+}
+.footer{
+    padding: 10px 15px 30px 15px;
+}
+
+
+.done-true {
+    text-decoration: line-through;
+    color: grey;
+}
+
+.removeBtn {
+    border-radius: 50%;
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    top: calc(50% - 10px);
+}
+
+.removeBtn:hover {
+    background-color:  #E20074;
+}
+
+span {
+    cursor: pointer;
+}
+.createTask {
+    background-color: #fff;
+    padding: 10px 10px;
+    border-bottom: 1px solid #E20074;
+}
+.createForm .col{
+    padding: 15px 15px;
+}
+.todo-list li.completed label {
+    color: #9B9B9B;
+}
+.tasksLeft{
+    color: #000;
+    font-size: 16px;
+}
+.tasksLeft span{
+    font-size: 22px;
+
+}
+.tasksLeft a{
+    color: #000; font-size: 14px;
+}
+.tasksLeft a:hover{
+    color: #E20074;
+}
+.tbtn{
+    background: #E20074;
+    color: #fff;
+    border:0px;
+    width: 140px;
+}
+.editrow{
+    padding-top:10px;
+    padding-bottom: 10px;
+    
+}
+
+@media screen and (max-width: 425px){
+    .createForm .col{
+        padding: 0px 5px;
+    }
+    .form-group{
+        width: 320px;
+    }
+    .tasksLeft{
+        float: none;
+        padding-left: 20px;
+        padding-top: 10px;
+    }
+    .headerRow{
+        padding: 10px;
+        font-size: 14px;
+    }
+    .todo-list li label{
+      
+    }
+    .todo-list li .toggle{
+      
+    }
+}
